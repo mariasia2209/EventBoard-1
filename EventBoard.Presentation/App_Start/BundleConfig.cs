@@ -1,15 +1,17 @@
-﻿using System.Web;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Web;
 using System.Web.Optimization;
 
 namespace EventBoard.Presentation
 {
-    public class BundleConfig
+    public class BundleConfig: IdentityUser
     {
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -25,6 +27,7 @@ namespace EventBoard.Presentation
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/themes/base/jquery-ui.css",
                       "~/Content/site.css"));
         }
     }

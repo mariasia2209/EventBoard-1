@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace EventBoard.Presentation.Models
@@ -79,6 +80,40 @@ namespace EventBoard.Presentation.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Surname")]
+        public string SecondName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of birth")]
+        [DataType(DataType.DateTime)]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
+        public Sex Sex { get; set; }
+    }
+
+    public enum Sex
+    {
+        [Display(Name = "Do not want to specify")]
+        None = 0,
+
+        [Display(Name = "Male")]
+        Male = 1,
+
+        [Display(Name = "Female")]
+        Female = 2
     }
 
     public class ResetPasswordViewModel
