@@ -1,0 +1,44 @@
+﻿@using EventBoard.Domain.Models
+@model AllEventsModel
+
+@{
+    ViewBag.Title = "All Events";
+}
+
+<h2>Index</h2>
+
+Categories: @Model.Statistics.TotalCategoryCount
+Tags: @Model.Statistics.TotalTagCount
+Events: @Model.Statistics.TotalEventCount
+News: @Model.Statistics.TotalNewsCount
+
+<h3>All categories</h3>
+@foreach (var category in Model.Categories)
+{
+    @Html.ActionLink(category.Name, "Category", "Event",
+            new { categoryId = category.Id },
+            new { @class = "btn btn-default navbar-btn" })
+}
+
+<h3>All tags</h3>
+@foreach (var tag in Model.Tags)
+{
+    @Html.ActionLink(tag.Name, "Tag", "Event",
+            new { tagId = tag.Id },
+            new { @class = "btn btn-default navbar-btn" })
+}
+
+@foreach (var eve in Model.Events)
+{
+    <div>Event: @eve.Name </div>
+    <div>Description: @eve.Description </div>
+    <div>Start: @eve.StartDate</div>
+    <div>End: @eve.EndDate</div>
+    <div>Category: @eve.Category</div>
+
+
+    <div>Count of likes:  @eve.Likes.Count</div>
+
+    <div>Comments: @eve.Comments.Count</div>
+    <div>Last commented: @eve.Comments.LastCommentDate</div>
+}

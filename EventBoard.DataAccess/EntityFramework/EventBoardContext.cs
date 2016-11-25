@@ -12,7 +12,7 @@ namespace EventBoard.DataAccess.EntityFramework
         {
         }
 
-        public static IEventBoardContext Create()
+        public static EventBoardContext Create()
         {
             return new EventBoardContext();
         }

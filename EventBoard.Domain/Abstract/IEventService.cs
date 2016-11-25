@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using EventBoard.Domain.Models;
 
 namespace EventBoard.Domain
 {
     public interface IEventService
     {
+        AllEventsModel GetAllEvents();
     }
 }
