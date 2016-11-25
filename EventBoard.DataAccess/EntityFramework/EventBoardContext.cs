@@ -5,14 +5,14 @@ namespace EventBoard.DataAccess.EntityFramework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class EventBoardContext : DbContext
+    public partial class EventBoardContext : DbContext, IEventBoardContext
     {
         public EventBoardContext()
             : base("name=EventBoard")
         {
         }
 
-        public static EventBoardContext Create()
+        public static IEventBoardContext Create()
         {
             return new EventBoardContext();
         }
