@@ -6,7 +6,9 @@
     <h1>Event Board</h1>
     <p class="lead">Event Board is a service that helps people to find large events as well as open mini-events, share information, monitor any news, changes, add event to personal calendar, etc.</p>
     <p class="lead">As possible feature we plan integration with Google Calendar and other third parties.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">View popular events &raquo;</a></p>
+
+    <p>@Html.ActionLink("View popular events &raquo;", "Index", "Event",
+            new { @class = "btn btn-primary btn-lg" })</p>
 </div>
 
 <div class="row">
