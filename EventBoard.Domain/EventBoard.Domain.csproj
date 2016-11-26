@@ -62,9 +62,11 @@
     <Compile Include="Abstract\IEventService.cs" />
     <Compile Include="EventService.cs" />
     <Compile Include="Models\AllEventsModel.cs" />
+    <Compile Include="Models\CategoryEventsViewModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\EventCommentsModel.cs" />
     <Compile Include="Models\EventCommentsSummaryModel.cs" />
+    <Compile Include="Models\EventHeaderModel.cs" />
     <Compile Include="Models\EventNewViewModel.cs" />
     <Compile Include="Models\EventShortModel.cs" />
     <Compile Include="Models\CreatorModel.cs" />

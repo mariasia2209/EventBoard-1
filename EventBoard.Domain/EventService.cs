@@ -186,5 +186,26 @@ namespace EventBoard.Domain
 
             return eventModel;
         }
+
+        public CategoryEventsViewModel GetEventsByCategory(int categoryId)
+        {
+            CategoryEventsViewModel categoryModel = Context.Categories
+                .Where(c => c.Id == categoryId)
+                .Select(c => new CategoryEventsViewModel
+                {
+                    CategoryId = c.Id,
+                    CategoryName = c.Name,
+                    Events = c.Events.Select(e => new EventHeaderModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        AuthorId = e.User.Id,
+                        AuthorName = e.User.FirstName,
+                        AuthorSurname = e.User.SecondName
+                    }).ToList()
+                }).FirstOrDefault();
+
+            return categoryModel;
+        }
     }
 }

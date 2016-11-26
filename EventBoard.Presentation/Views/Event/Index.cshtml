@@ -30,11 +30,16 @@ News: @Model.Statistics.TotalNewsCount
 
 @foreach (var eve in Model.Events)
 {
-    
-    <h3>Event: @eve.Name </h3>
+
+    <h3>
+        @Html.ActionLink(eve.Name, "Index", "Event",
+            new { eventId = eve.Id },
+            new { @class = "" })
+    </h3>
+
     if (@eve.Image != null)
     {
-        <img src="~/Content/Images/@eve.Image" alt="@eve.Name" />
+    <img src="~/Content/Images/@eve.Image" alt="@eve.Name" />
     }
     <div>Description: @eve.Description </div>
     <div>Start: @eve.StartDate</div>
@@ -46,4 +51,4 @@ News: @Model.Statistics.TotalNewsCount
 
     <div>Comments: @eve.Comments.Count</div>
     <div>Last commented: @eve.Comments.LastCommentDate</div>
-}
+    }

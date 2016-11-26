@@ -1,6 +1,7 @@
 ﻿using EventBoard.Domain;
 using EventBoard.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EventBoard.Presentation.Controllers
@@ -33,12 +34,15 @@ namespace EventBoard.Presentation.Controllers
 
         public ActionResult Tag(int? tagId)
         {
+
             return View(tagId);
         }
 
         public ActionResult Category(int? categoryId)
         {
-            return View(categoryId);
+            CategoryEventsViewModel events = EventService.GetEventsByCategory(categoryId ?? 0);
+
+            return View(events);
         }
 
         [Authorize]
