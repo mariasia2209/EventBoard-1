@@ -30,8 +30,9 @@ namespace EventBoard.Domain
 
                 StartDate = e.EventBegin,
                 EndDate = e.EventEnd,
-
+                
                 Category = e.Category.Name,
+                Image = e.Image,
 
                 Name = e.Name,
                 Description = e.Description,
@@ -59,7 +60,9 @@ namespace EventBoard.Domain
                     Id = t.Id,
                     Name = t.Name
                 }).ToList()
-            }).ToList();
+            })
+            .OrderBy(e => e.Id)
+            .ToList();
 
             EventsSummaryModel summary = new EventsSummaryModel
             {

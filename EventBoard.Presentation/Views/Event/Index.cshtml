@@ -30,7 +30,12 @@ News: @Model.Statistics.TotalNewsCount
 
 @foreach (var eve in Model.Events)
 {
-    <div>Event: @eve.Name </div>
+    
+    <h3>Event: @eve.Name </h3>
+    if (@eve.Image != null)
+    {
+        <img src="~/Content/Images/@eve.Image" alt="@eve.Name" />
+    }
     <div>Description: @eve.Description </div>
     <div>Start: @eve.StartDate</div>
     <div>End: @eve.EndDate</div>
