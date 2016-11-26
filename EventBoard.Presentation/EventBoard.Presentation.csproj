@@ -299,6 +299,8 @@
     <Content Include="Views\Event\Index.cshtml" />
     <Content Include="Views\Event\Tag.cshtml" />
     <Content Include="Views\Event\Category.cshtml" />
+    <Content Include="Views\Event\Event.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

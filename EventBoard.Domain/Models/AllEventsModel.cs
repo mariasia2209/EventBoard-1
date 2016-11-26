@@ -8,7 +8,7 @@ namespace EventBoard.Domain.Models
 {
     public class AllEventsModel
     {
-        public List<StrictEventModel> Events { get; set; }
+        public List<EventShortModel> Events { get; set; }
         public EventsSummaryModel Statistics { get; set; }
         public List<TagModel> Tags { get; set; }
         public List<CategoryModel> Categories { get; set; }

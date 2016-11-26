@@ -195,8 +195,7 @@ namespace EventBoard.Presentation.Controllers
             }
             catch (Exception ex)
             {
-                int u = 2;
-                u++;
+                throw ex;
             }
 
             // If we got this far, something failed, redisplay form

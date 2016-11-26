@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace EventBoard.Domain.Models
 {
-    public class StrictEventModel
+    public class EventFullModel
     {
+        public int Id { get; set; }
         public CreatorModel Creator { get; set; }
+        public DateTime CreationTime { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public string Name { get; set; }
+        public string Image { get; set; }
         public string Description { get; set; }
         public EventLikeCounterModel Likes { get; set; }
         public List<TagModel> Tags { get; set; }
-        public int CommentsCount { get; set; }
-        public EventCommentsSummaryModel Comments { get; set; }
+        public List<EventCommentModel> Comments { get; set; }
     }
 }

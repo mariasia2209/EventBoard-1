@@ -1,0 +1,47 @@
+﻿@model EventFullModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+<h2>@Model.Name</h2>
+<h4>by @Model.Creator.FirstName <b>@Model.Creator.SecondName</b></h4>
+
+<div>
+    @Html.ActionLink(@Model.CategoryName, "Category", "Event",
+            new { categoryId = @Model.CategoryId },
+            new { @class = "btn btn-default navbar-btn" })
+</div><br>
+
+<div>Description: @Model.Description</div><br>
+
+<div>Count of likes: @Model.Likes.Count </div><br>
+<div>
+    Following users left likes:
+    @foreach (var user in Model.Likes.Users)
+    {
+        <div>@user.FirstName @user.SecondName</div>
+    }
+</div><br>
+
+@if (@Model.Tags.Count > 0)
+{
+    <h2>All tags:</h2>
+    foreach (var tag in Model.Tags)
+    {
+        @Html.ActionLink(tag.Name, "Tag", "Event",
+                new { tagId = tag.Id },
+                new { @class = "btn btn-default navbar-btn" })
+    }
+}
+
+
+@if (@Model.Likes.Count > 0)
+{
+    <h2>All comments:</h2>
+    foreach (var comment in Model.Comments)
+    {
+        <div>@comment.Time</div><br/>
+        <div>@comment.Text</div><br />
+        <div>@comment.User.FirstName @comment.User.SecondName</div><br />
+    }
+}

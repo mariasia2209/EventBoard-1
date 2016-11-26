@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EventBoard.Domain.Models
 {
-    public class UserLikeModel
+    public class UserShortModel
     {
         public string Id { get; set; }
         public string FirstName { get; set; }
