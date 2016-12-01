@@ -12,6 +12,8 @@
             new { @class = "btn btn-default navbar-btn" })
 </div><br>
 
+<img src="@Url.Content("~/Content/Images/" + Model.Image)" />
+
 <div>Description: @Model.Description</div><br>
 
 <div>Count of likes: @Model.Likes.Count </div><br>

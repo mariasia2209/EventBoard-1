@@ -30,15 +30,19 @@ News: @Model.Statistics.TotalNewsCount
 
 @foreach (var eve in Model.Events)
 {
-    <div>Event: @eve.Name </div>
-    <div>Description: @eve.Description </div>
-    <div>Start: @eve.StartDate</div>
-    <div>End: @eve.EndDate</div>
-    <div>Category: @eve.Category</div>
+        <h3>
+            @Html.ActionLink(eve.Name, "Index", "Event",
+            new { eventId = eve.Id }, null)
+        </h3>
+        <img src="@Url.Content("~/Content/Images/" + eve.Image)" />
+        <div>Description: @eve.Description </div>
+        <div>Start: @eve.StartDate</div>
+        <div>End: @eve.EndDate</div>
+        <div>Category: @eve.Category</div>
 
 
-    <div>Count of likes:  @eve.Likes.Count</div>
+        <div>Count of likes:  @eve.Likes.Count</div>
 
-    <div>Comments: @eve.Comments.Count</div>
-    <div>Last commented: @eve.Comments.LastCommentDate</div>
-}
+        <div>Comments: @eve.Comments.Count</div>
+        <div>Last commented: @eve.Comments.LastCommentDate</div>
+        }
