@@ -29,6 +29,9 @@ namespace EventBoard.Presentation
                       "~/Content/bootstrap.css",
                       "~/Content/themes/base/jquery-ui.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/bundles/CustomScript").Include(
+                      "~/Scripts/register.js"));
         }
     }
 }
