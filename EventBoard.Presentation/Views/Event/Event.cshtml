@@ -12,18 +12,21 @@
             new { @class = "btn btn-default navbar-btn" })
 </div><br>
 
-<img src="@Url.Content("~/Content/Images/" + Model.Image)" />
+<img src="@Url.Content("~/Content/Images/" + Model.Image)" class="img-rounded" style="margin: 0 auto;"/>
 
 <h3>Description:</h3>
 <p>@Model.Description</p>
 
 
 
-<a href="@Url.Action("Like", "Event", new { eventId = Model.Id })" class="btn btn-danger btn-lg active">
+<a href="@Url.Action("Like", "Event", new { eventId = Model.Id })" class="btn btn-danger">
     @Model.Likes.Count <span class="glyphicon glyphicon-heart"></span> @(Model.IsLikedByCurrentUser? "Unlike": "Like")
 </a>
 
-<a data-toggle="collapse" href="#collapse1">Users that left likes</a>
+@if (Model.Likes.Count > 0)
+{
+    <a data-toggle="collapse" href="#collapse1">Users that left likes</a>
+}
 
 <div id="collapse1" class="panel-collapse collapse" style="width:auto;">
     <br />
@@ -58,5 +61,5 @@
         }
     </div>
 }
-
-@Html.ActionLink("Add comment", "AddComment", "Event", new { eventId = Model.Id }, new { @class = "btn btn-primary btn-lg navbar-btn" })
+<br/>
+@Html.ActionLink("Add comment", "AddComment", "Event", new { eventId = Model.Id }, new { @class = "btn btn-primary navbar-btn" })
