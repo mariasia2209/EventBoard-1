@@ -16,7 +16,6 @@ namespace EventBoard.Domain.Models
         public string Name { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }
-        public string Image { get; set; }
         public EventLikeCounterModel Likes { get; set; }
         public List<TagModel> Tags { get; set; }
         public EventCommentsSummaryModel Comments { get; set; }
