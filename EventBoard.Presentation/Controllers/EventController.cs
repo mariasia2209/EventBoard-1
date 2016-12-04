@@ -26,7 +26,13 @@ namespace EventBoard.Presentation.Controllers
             }
             else
             {
-                EventFullModel eventFullModel = EventService.GetEvent(eventId.Value);
+                string userName = null;
+                if (User != null)
+                {
+                    userName = User.Identity.Name;
+                }
+                
+                EventFullModel eventFullModel = EventService.GetEvent(eventId.Value, userName);
 
                 return View("Event", eventFullModel);
             }
@@ -91,6 +97,17 @@ namespace EventBoard.Presentation.Controllers
             };
 
             return View(newComment);
-        } 
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Like(int eventId)
+        {
+            string userName = User.Identity.Name;
+
+            EventService.AddLike(eventId, userName);
+
+            return RedirectToAction("Index", "Event", new { eventId = eventId });
+        }
     }
 }

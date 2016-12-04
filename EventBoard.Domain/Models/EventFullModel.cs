@@ -21,5 +21,6 @@ namespace EventBoard.Domain.Models
         public EventLikeCounterModel Likes { get; set; }
         public List<TagModel> Tags { get; set; }
         public List<EventCommentModel> Comments { get; set; }
+        public bool IsLikedByCurrentUser { get; set; }
     }
 }

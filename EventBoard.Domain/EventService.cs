@@ -129,7 +129,7 @@ namespace EventBoard.Domain
             return newEvent.Id;
         }
 
-        public EventFullModel GetEvent(int eventId)
+        public EventFullModel GetEvent(int eventId, string userName)
         {
             EventFullModel eventModel = Context.Events
                 .Where(e => e.Id == eventId)
@@ -163,6 +163,7 @@ namespace EventBoard.Domain
                             Image = l.User.Image
                         }).ToList()
                     },
+                    IsLikedByCurrentUser = userName == null ? false : e.Likes.Any(l => l.User.UserName == userName),
                     Tags = e.Tags.Select(t => new TagModel
                     {
                         Id = t.Id,
@@ -232,6 +233,44 @@ namespace EventBoard.Domain
 
             Context.SaveChanges();
 
+        }
+
+        public void AddLike(int eventId, string userName)
+        {
+            if (userName == null)
+            {
+                return;
+            }
+
+            string userId = Context.Users
+                .Where(u => u.UserName == userName)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+
+            if (userId == null)
+            {
+                return;
+            }
+
+            List<Like> existingLikes = Context.Likes.Where(l => l.Liker_Id == userId && l.LikedEvent_Id == eventId).ToList();
+
+            if (existingLikes.Count == 0)
+            {
+                Like newLike = new Like
+                {
+                    LikedEvent_Id = eventId,
+                    Liker_Id = userId,
+                    Time = DateTime.Now
+                };
+
+                Context.Likes.Add(newLike);
+            }
+            else
+            {
+                Context.Likes.RemoveRange(existingLikes);
+            }
+            
+            Context.SaveChanges();
         }
     }
 }
