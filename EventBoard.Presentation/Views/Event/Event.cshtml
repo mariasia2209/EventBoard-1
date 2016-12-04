@@ -12,7 +12,7 @@
             new { @class = "btn btn-default navbar-btn" })
 </div><br>
 
-<img src="~/Content/Images/@Model.Image" alt="@Model.Name" />
+<img src="@Url.Content("~/Content/Images/" + Model.Image)" />
 
 <div>Description: @Model.Description</div><br>
 

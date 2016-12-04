@@ -30,7 +30,6 @@ namespace EventBoard.Domain
 
                 StartDate = e.EventBegin,
                 EndDate = e.EventEnd,
-                
                 Category = e.Category.Name,
                 Image = e.Image,
 
