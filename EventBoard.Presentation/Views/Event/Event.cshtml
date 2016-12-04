@@ -14,7 +14,7 @@
 
 <img src="@Url.Content("~/Content/Images/" + Model.Image)" />
 
-<div>Description: @Model.Description</div><br>
+<p>Description: @Model.Description</p>
 
 <div>Count of likes: @Model.Likes.Count </div><br>
 <div>
@@ -31,19 +31,25 @@
     foreach (var tag in Model.Tags)
     {
         @Html.ActionLink(tag.Name, "Tag", "Event",
-                new { tagId = tag.Id },
-                new { @class = "btn btn-default navbar-btn" })
+                     new { tagId = tag.Id },
+                     new { @class = "btn btn-default navbar-btn" })
     }
 }
 
-
-@if (@Model.Likes.Count > 0)
+@if (@Model.Comments.Count > 0)
 {
-    <h2>All comments:</h2>
-    foreach (var comment in Model.Comments)
-    {
-        <div>@comment.Time</div><br/>
-        <div>@comment.Text</div><br />
-        <div>@comment.User.FirstName @comment.User.SecondName</div><br />
-    }
+    <h3>Comments:</h3>
+    <div class="panel-group">
+        @foreach (var comment in Model.Comments)
+        {
+    
+            <div class="panel panel-default">
+                <div class="panel-heading">@comment.User.FirstName <b>@comment.User.SecondName</b> - @comment.Time.ToLocalTime()</div>
+                <div class="panel-body">@comment.Text</div>
+            </div>
+    
+        }
+    </div>
 }
+
+@Html.ActionLink("Add comment", "AddComment", "Event", new { eventId = Model.Id }, new { @class = "btn btn-default navbar-btn" })

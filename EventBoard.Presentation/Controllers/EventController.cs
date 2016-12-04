@@ -67,5 +67,30 @@ namespace EventBoard.Presentation.Controllers
 
             return RedirectToAction("Index", "Event", new { eventId = eventId });
         }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddComment(CommentNewViewModel comment, int eventId)
+        {
+            string userName = User.Identity.Name;
+
+            comment.EventId = eventId;
+
+            EventService.AddNewComment(userName, comment);
+
+            return RedirectToAction("Index", "Event", new { eventId = eventId });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult AddComment(int eventId)
+        {
+            CommentNewViewModel newComment = new CommentNewViewModel
+            {
+                EventId = eventId
+            };
+
+            return View(newComment);
+        } 
     }
 }

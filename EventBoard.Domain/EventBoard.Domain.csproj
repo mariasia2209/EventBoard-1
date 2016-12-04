@@ -64,6 +64,7 @@
     <Compile Include="Models\AllEventsModel.cs" />
     <Compile Include="Models\CategoryEventsViewModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CommentNewViewModel.cs" />
     <Compile Include="Models\EventCommentsModel.cs" />
     <Compile Include="Models\EventCommentsSummaryModel.cs" />
     <Compile Include="Models\EventHeaderModel.cs" />

@@ -206,5 +206,32 @@ namespace EventBoard.Domain
 
             return categoryModel;
         }
+
+        public void AddNewComment(string userName, CommentNewViewModel comment)
+        {
+            string userId = Context.Users
+                .Where(u => u.UserName == userName)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+
+            if (userId == null || comment.EventId == null)
+            {
+                return;
+            }
+
+            Comment newComment = new Comment
+            {
+                Time = DateTime.Now,
+                Text = comment.Text,
+                Suspended = false,
+                Creator_Id = userId,
+                Event_Id = (int)comment.EventId
+            };
+
+            Context.Comments.Add(newComment);
+
+            Context.SaveChanges();
+
+        }
     }
 }

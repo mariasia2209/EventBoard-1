@@ -15,11 +15,9 @@
                 <fieldset>
                     <h3  class="fs-title" style="margin-bottom: 33px;">Use your account to log in</h3>
 
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-12"})
                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "E-mail" })
                     
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-12" })
                     @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
                     

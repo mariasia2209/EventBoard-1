@@ -5,19 +5,21 @@
     ViewBag.Title = "All Events";
 }
 
-<h2>Index</h2>
+<br />
+<h2>Event Board</h2>
 
-Categories: @Model.Statistics.TotalCategoryCount
-Tags: @Model.Statistics.TotalTagCount
-Events: @Model.Statistics.TotalEventCount
-News: @Model.Statistics.TotalNewsCount
+Categories: @Model.Statistics.TotalCategoryCount <br />
+Tags: @Model.Statistics.TotalTagCount <br /> 
+Events: @Model.Statistics.TotalEventCount <br />
+News: @Model.Statistics.TotalNewsCount <br />
 
 <h3>All categories</h3>
 @foreach (var category in Model.Categories)
 {
     @Html.ActionLink(category.Name, "Category", "Event",
             new { categoryId = category.Id },
-            new { @class = "btn btn-default navbar-btn" })
+            new { @class = "btn btn-default navbar-btn",
+                style = "margin: auto 6px auto auto;"})
 }
 
 <h3>All tags</h3>

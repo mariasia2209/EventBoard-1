@@ -332,6 +332,7 @@
     <Content Include="Views\Event\Category.cshtml" />
     <Content Include="Views\Event\Event.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Event\AddComment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
