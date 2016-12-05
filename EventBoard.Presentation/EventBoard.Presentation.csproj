@@ -189,6 +189,7 @@
     <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserProfileEditModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -332,6 +333,7 @@
     <Content Include="Views\Event\Category.cshtml" />
     <Content Include="Views\Event\Event.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Manage\ChangeData.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

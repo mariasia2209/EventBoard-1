@@ -1,0 +1,22 @@
+﻿@model EventBoard.Presentation.Models.UserProfileEdit
+
+@{
+    ViewBag.Title = "Change Data";
+}
+
+<h2>@ViewBag.Title.</h2>
+
+
+@using (Html.BeginForm("ChangeData", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.EditorFor(model => model.FirstName)
+    @Html.EditorFor(model => model.LastName)
+    @Html.EditorFor(model => model.Email)
+
+    <input type="submit" value="Save" />
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

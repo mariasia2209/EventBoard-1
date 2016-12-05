@@ -331,7 +331,52 @@ namespace EventBoard.Presentation.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        public ActionResult ChangeData()
+        {
+            var userId = User.Identity.GetUserId();
+
+            // Fetch the userprofile
+            //UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.Equals(username));
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            // Construct the viewmodel
+            UserProfileEdit model = new UserProfileEdit();
+            model.FirstName =user.FirstName;
+            model.SecondName = user.SecondName;
+            model.Email = user.Email;
+            model.BirthDate = Convert.ToDateTime(user.BirthDate);
+            model.PhoneNumber = user.PhoneNumber;
+            //model.Sex = user.Sex;
+
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeData(UserProfileEdit userprofile)
+        {
+            if (ModelState.IsValid)
+            {
+                string username = User.Identity.Name;
+                // Get the userprofile
+                //UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.Equals(username));
+                var user = UserManager.FindById(User.Identity.GetUserId());
+
+                //// Update fields
+                //user.FirstName = userprofile.FirstName;
+                //user.LastName = userprofile.LastName;
+                //user.Email = userprofile.Email;
+
+                //db.Entry(user).State = EntityState.Modified;
+
+                //db.SaveChanges();
+
+                return RedirectToAction("Index", "Home"); // or whatever
+            }
+
+            return View(userprofile);
+        }
+
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 

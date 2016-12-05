@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using System;
 
 namespace EventBoard.Presentation.Models
 {
@@ -56,6 +57,36 @@ namespace EventBoard.Presentation.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class UserProfileEdit
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Surname")]
+        public string SecondName { get; set; }
+
+        [Required]
+        [Display(Name = "Date of birth")]
+        [DataType(DataType.DateTime)]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Gender")]
+        public Sex Sex { get; set; }
     }
 
     public class AddPhoneNumberViewModel
