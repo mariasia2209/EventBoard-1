@@ -1,9 +1,17 @@
-﻿@model int?
+﻿@model CategoryEventsViewModel
 
 @{
     ViewBag.Title = "Category";
 }
 
-<h2>Category filtered page will be here</h2>
-Category Id: @Model
+<h2>Category: <b>@Model.CategoryName</b></h2>
+
+@foreach(var e in Model.Events)
+{
+<h3>@Html.ActionLink(e.Name, "Index", "Event", new { eventId = e.Id }, new { @class = "" })</h3>
+<h4>by @e.AuthorName <b>@e.AuthorSurname</b></h4>
+}
+
+
+
 

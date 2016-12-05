@@ -362,14 +362,15 @@ namespace EventBoard.Presentation.Controllers
                 var user = UserManager.FindById(User.Identity.GetUserId());
 
                 //// Update fields
-                //user.FirstName = userprofile.FirstName;
-                //user.LastName = userprofile.LastName;
-                //user.Email = userprofile.Email;
-
+                user.FirstName = userprofile.FirstName;
+                user.SecondName = userprofile.SecondName;
+                user.Email = userprofile.Email;
+                user.BirthDate = userprofile.BirthDate;
+                user.PhoneNumber = userprofile.PhoneNumber;
                 //db.Entry(user).State = EntityState.Modified;
 
                 //db.SaveChanges();
-
+                UserManager.Update(user);
                 return RedirectToAction("Index", "Home"); // or whatever
             }
 

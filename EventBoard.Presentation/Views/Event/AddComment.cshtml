@@ -1,0 +1,20 @@
+﻿@model EventBoard.Domain.Models.CommentNewViewModel
+
+@{
+    ViewBag.Title = "Add Comment";
+}
+
+<h2>Add Comment</h2>
+
+@using (Html.BeginForm("AddComment", "Event", new { eventId = Model.EventId }, FormMethod.Post, new { @class = "form-horizontal msform", role = "form" }))
+{
+    <div class="form-group">
+        <label for="comment">Comment:</label>
+
+        @Html.TextAreaFor(model => model.Text, new { @class = "form-control", @rows = "5", @id = "comment" })
+
+        <input type="submit" value="Submit" class="submit action-button" style="display:block; margin:22px auto 10px auto;" />
+    
+    </div>
+}
+

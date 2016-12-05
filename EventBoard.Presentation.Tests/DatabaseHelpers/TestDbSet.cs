@@ -26,6 +26,15 @@ namespace EventBoard.Presentation.Tests.DatabaseHelpers
             return item;
         }
 
+        public override IEnumerable<TEntity> AddRange(IEnumerable<TEntity> items)
+        {
+            foreach (TEntity item in items)
+            {
+                _data.Add(item);
+            }
+            return items ?? new List<TEntity>();
+        }
+
         public override TEntity Remove(TEntity item)
         {
             _data.Remove(item);

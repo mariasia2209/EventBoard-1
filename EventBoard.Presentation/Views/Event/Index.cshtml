@@ -5,19 +5,21 @@
     ViewBag.Title = "All Events";
 }
 
-<h2>Index</h2>
+<br />
+<h2>Event Board</h2>
 
-Categories: @Model.Statistics.TotalCategoryCount
-Tags: @Model.Statistics.TotalTagCount
-Events: @Model.Statistics.TotalEventCount
-News: @Model.Statistics.TotalNewsCount
+Categories: @Model.Statistics.TotalCategoryCount <br />
+Tags: @Model.Statistics.TotalTagCount <br /> 
+Events: @Model.Statistics.TotalEventCount <br />
+News: @Model.Statistics.TotalNewsCount <br />
 
 <h3>All categories</h3>
 @foreach (var category in Model.Categories)
 {
     @Html.ActionLink(category.Name, "Category", "Event",
             new { categoryId = category.Id },
-            new { @class = "btn btn-default navbar-btn" })
+            new { @class = "btn btn-default navbar-btn",
+                style = "margin: auto 6px auto auto;"})
 }
 
 <h3>All tags</h3>
@@ -30,19 +32,25 @@ News: @Model.Statistics.TotalNewsCount
 
 @foreach (var eve in Model.Events)
 {
-        <h3>
-            @Html.ActionLink(eve.Name, "Index", "Event",
-            new { eventId = eve.Id }, null)
-        </h3>
-        <img src="@Url.Content("~/Content/Images/" + eve.Image)" />
-        <div>Description: @eve.Description </div>
-        <div>Start: @eve.StartDate</div>
-        <div>End: @eve.EndDate</div>
-        <div>Category: @eve.Category</div>
+
+    <h3>
+        @Html.ActionLink(eve.Name, "Index", "Event",
+            new { eventId = eve.Id },
+            new { @class = "" })
+    </h3>
+
+    if (@eve.Image != null)
+    {
+    <img src="~/Content/Images/@eve.Image" alt="@eve.Name" />
+    }
+    <div>Description: @eve.Description </div>
+    <div>Start: @eve.StartDate</div>
+    <div>End: @eve.EndDate</div>
+    <div>Category: @eve.Category</div>
 
 
-        <div>Count of likes:  @eve.Likes.Count</div>
+    <div>Count of likes:  @eve.Likes.Count</div>
 
-        <div>Comments: @eve.Comments.Count</div>
-        <div>Last commented: @eve.Comments.LastCommentDate</div>
-        }
+    <div>Comments: @eve.Comments.Count</div>
+    <div>Last commented: @eve.Comments.LastCommentDate</div>
+}

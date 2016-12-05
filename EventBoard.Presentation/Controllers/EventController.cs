@@ -1,6 +1,7 @@
 ﻿using EventBoard.Domain;
 using EventBoard.Domain.Models;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace EventBoard.Presentation.Controllers
@@ -25,7 +26,13 @@ namespace EventBoard.Presentation.Controllers
             }
             else
             {
-                EventFullModel eventFullModel = EventService.GetEvent(eventId.Value);
+                string userName = null;
+                if (User != null)
+                {
+                    userName = User.Identity.Name;
+                }
+                
+                EventFullModel eventFullModel = EventService.GetEvent(eventId.Value, userName);
 
                 return View("Event", eventFullModel);
             }
@@ -33,12 +40,15 @@ namespace EventBoard.Presentation.Controllers
 
         public ActionResult Tag(int? tagId)
         {
+
             return View(tagId);
         }
 
         public ActionResult Category(int? categoryId)
         {
-            return View(categoryId);
+            CategoryEventsViewModel events = EventService.GetEventsByCategory(categoryId ?? 0);
+
+            return View(events);
         }
 
         [Authorize]
@@ -60,6 +70,42 @@ namespace EventBoard.Presentation.Controllers
             string userName = User.Identity.Name;
 
             int eventId = EventService.CreateNewEvent(newEvent, userName);
+
+            return RedirectToAction("Index", "Event", new { eventId = eventId });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult AddComment(CommentNewViewModel comment, int eventId)
+        {
+            string userName = User.Identity.Name;
+
+            comment.EventId = eventId;
+
+            EventService.AddNewComment(userName, comment);
+
+            return RedirectToAction("Index", "Event", new { eventId = eventId });
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult AddComment(int eventId)
+        {
+            CommentNewViewModel newComment = new CommentNewViewModel
+            {
+                EventId = eventId
+            };
+
+            return View(newComment);
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Like(int eventId)
+        {
+            string userName = User.Identity.Name;
+
+            EventService.AddLike(eventId, userName);
 
             return RedirectToAction("Index", "Event", new { eventId = eventId });
         }

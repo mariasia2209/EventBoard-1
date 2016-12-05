@@ -30,9 +30,8 @@ namespace EventBoard.Domain
 
                 StartDate = e.EventBegin,
                 EndDate = e.EventEnd,
-
-                Image = e.Image,
                 Category = e.Category.Name,
+                Image = e.Image,
 
                 Name = e.Name,
                 Description = e.Description,
@@ -60,7 +59,9 @@ namespace EventBoard.Domain
                     Id = t.Id,
                     Name = t.Name
                 }).ToList()
-            }).ToList();
+            })
+            .OrderBy(e => e.Id)
+            .ToList();
 
             EventsSummaryModel summary = new EventsSummaryModel
             {
@@ -128,7 +129,7 @@ namespace EventBoard.Domain
             return newEvent.Id;
         }
 
-        public EventFullModel GetEvent(int eventId)
+        public EventFullModel GetEvent(int eventId, string userName)
         {
             EventFullModel eventModel = Context.Events
                 .Where(e => e.Id == eventId)
@@ -162,6 +163,7 @@ namespace EventBoard.Domain
                             Image = l.User.Image
                         }).ToList()
                     },
+                    IsLikedByCurrentUser = userName == null ? false : e.Likes.Any(l => l.User.UserName == userName),
                     Tags = e.Tags.Select(t => new TagModel
                     {
                         Id = t.Id,
@@ -183,6 +185,92 @@ namespace EventBoard.Domain
                 }).FirstOrDefault();
 
             return eventModel;
+        }
+
+        public CategoryEventsViewModel GetEventsByCategory(int categoryId)
+        {
+            CategoryEventsViewModel categoryModel = Context.Categories
+                .Where(c => c.Id == categoryId)
+                .Select(c => new CategoryEventsViewModel
+                {
+                    CategoryId = c.Id,
+                    CategoryName = c.Name,
+                    Events = c.Events.Select(e => new EventHeaderModel
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        AuthorId = e.User.Id,
+                        AuthorName = e.User.FirstName,
+                        AuthorSurname = e.User.SecondName
+                    }).ToList()
+                }).FirstOrDefault();
+
+            return categoryModel;
+        }
+
+        public void AddNewComment(string userName, CommentNewViewModel comment)
+        {
+            string userId = Context.Users
+                .Where(u => u.UserName == userName)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+
+            if (userId == null || comment.EventId == null)
+            {
+                return;
+            }
+
+            Comment newComment = new Comment
+            {
+                Time = DateTime.Now,
+                Text = comment.Text,
+                Suspended = false,
+                Creator_Id = userId,
+                Event_Id = (int)comment.EventId
+            };
+
+            Context.Comments.Add(newComment);
+
+            Context.SaveChanges();
+
+        }
+
+        public void AddLike(int eventId, string userName)
+        {
+            if (userName == null)
+            {
+                return;
+            }
+
+            string userId = Context.Users
+                .Where(u => u.UserName == userName)
+                .Select(u => u.Id)
+                .FirstOrDefault();
+
+            if (userId == null)
+            {
+                return;
+            }
+
+            List<Like> existingLikes = Context.Likes.Where(l => l.Liker_Id == userId && l.LikedEvent_Id == eventId).ToList();
+
+            if (existingLikes.Count == 0)
+            {
+                Like newLike = new Like
+                {
+                    LikedEvent_Id = eventId,
+                    Liker_Id = userId,
+                    Time = DateTime.Now
+                };
+
+                Context.Likes.Add(newLike);
+            }
+            else
+            {
+                Context.Likes.RemoveRange(existingLikes);
+            }
+            
+            Context.SaveChanges();
         }
     }
 }

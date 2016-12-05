@@ -12,18 +12,30 @@
             new { @class = "btn btn-default navbar-btn" })
 </div><br>
 
-<img src="@Url.Content("~/Content/Images/" + Model.Image)" />
+<img src="@Url.Content("~/Content/Images/" + Model.Image)" class="img-rounded" style="margin: 0 auto;"/>
 
-<div>Description: @Model.Description</div><br>
+<h3>Description:</h3>
+<p>@Model.Description</p>
 
-<div>Count of likes: @Model.Likes.Count </div><br>
-<div>
-    Following users left likes:
+
+
+<a href="@Url.Action("Like", "Event", new { eventId = Model.Id })" class="btn btn-danger">
+    @Model.Likes.Count <span class="glyphicon glyphicon-heart"></span> @(Model.IsLikedByCurrentUser? "Unlike": "Like")
+</a>
+
+@if (Model.Likes.Count > 0)
+{
+    <a data-toggle="collapse" href="#collapse1">Users that left likes</a>
+}
+
+<div id="collapse1" class="panel-collapse collapse" style="width:auto;">
+    <br />
     @foreach (var user in Model.Likes.Users)
     {
-        <div>@user.FirstName @user.SecondName</div>
+        <li class="list-group-item">@user.FirstName <b>@user.SecondName</b> </li>
     }
-</div><br>
+</div>
+
 
 @if (@Model.Tags.Count > 0)
 {
@@ -31,19 +43,23 @@
     foreach (var tag in Model.Tags)
     {
         @Html.ActionLink(tag.Name, "Tag", "Event",
-                new { tagId = tag.Id },
-                new { @class = "btn btn-default navbar-btn" })
+                     new { tagId = tag.Id },
+                     new { @class = "btn btn-default navbar-btn" })
     }
 }
 
-
-@if (@Model.Likes.Count > 0)
+@if (@Model.Comments.Count > 0)
 {
-    <h2>All comments:</h2>
-    foreach (var comment in Model.Comments)
-    {
-        <div>@comment.Time</div><br/>
-        <div>@comment.Text</div><br />
-        <div>@comment.User.FirstName @comment.User.SecondName</div><br />
-    }
+    <h3>Comments:</h3>
+    <div class="panel-group">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">@comment.User.FirstName <b>@comment.User.SecondName</b> - @comment.Time.ToLocalTime()</div>
+                <div class="panel-body">@comment.Text</div>
+            </div>
+        }
+    </div>
 }
+<br/>
+@Html.ActionLink("Add comment", "AddComment", "Event", new { eventId = Model.Id }, new { @class = "btn btn-primary navbar-btn" })
