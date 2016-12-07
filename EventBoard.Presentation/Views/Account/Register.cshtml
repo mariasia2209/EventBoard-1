@@ -8,12 +8,11 @@
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal msform", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    @*<h4>Create a new account.</h4>
-    <hr />*@
+    <h2 style="margin-top: -22px; padding-bottom: 33px;">Create a new account.</h2>
+    <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     @*<form>*@
     <fieldset>
-        <h2 class="fs-title">Create your account</h2>
         <h3 class="fs-subtitle">This is step 1</h3>
         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder="E-mail" })
         @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder="Password" })
@@ -48,7 +47,6 @@
         @Html.DropDownListFor(m => m.Sex,
                 new SelectList(Enum.GetNames(typeof(EventBoard.Presentation.Models.Sex))),
                 new { @class = "form-control" })
-        <input type="button" name="previous" class="previous action-button" value="Previous" />
         <input type="submit" name="submit" class="submit action-button" value="Submit" />
     </fieldset>
     @*</form>*@

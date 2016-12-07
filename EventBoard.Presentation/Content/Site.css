@@ -1,12 +1,12 @@
 ﻿body {
     padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 0;
 }
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    /*padding-left: 15px;
+    padding-right: 15px;*/
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -33,23 +33,65 @@ textarea {
   margin-bottom: 6px;
 }
 .navbar-default.navbar-fixed-top {
-  padding: 8px;
-  background: #fff;
+    position: fixed;
+    display: block;
+    width: 100%;
+    float: left;
+    min-height: 8vh;
+  padding: 0;
+  background: transparent;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   z-index: 1201;
 }
+.navbar-default.navbar-fixed-top .background {
+    width:100%;
+    margin: 0;
+    height:12vh;
+    background: #FFFFFF;
+    opacity: .94;
+    filter: blur(10px);
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -ms-filter: blur(1px);
+}
+.navbar-default.navbar-fixed-top .container-fluid {
+   position: absolute;
+   top: 0;
+   width: 100%;
+   padding: 16px 33px;
+   padding-top: 11px;
+}
 
 .navbar-default .navbar-brand {
-    border: 1px solid #27AE60;
-    padding: 12px;
+    display: inline-block;
+    width: 212px;
+    height: 46px;
+    background: url("Images/logo-EventBoard.png");
+    background-size: cover;
     border-radius: 4px;
+    z-index: 1202;
 }
 .navbar-default .navbar-brand:hover {
-    color: #27AE60;
+    cursor:pointer;
 }
 
 .navbar-right li a {
     font-size: 18px;
+    cursor:pointer;
+}
+
+.navbar-nav > li:first-child {
+    margin-left: 30px;
+    padding-left: 16px;
+    border-left: 1px solid #999;
+}
+.navbar-nav > li > a {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.navbar-right > li {
+    border: none !important;
 }
 
 /*register styles*/
@@ -59,14 +101,14 @@ textarea {
 /*basic reset*/
 * {margin: 0; padding: 0;}
 
-html {
+/*html {
 	height: 100%;
 	/*Image only BG fallback*/
 	
 	/*background = gradient + image pattern combo*/
 	background: 
 		linear-gradient(rgba(196, 102, 0, 0.6), rgba(155, 89, 182, 0.6));
-}
+}*/
 
 body {
 	font-family: montserrat, arial, verdana;
@@ -110,7 +152,7 @@ body {
 /*buttons*/
 .msform .action-button {
 	width: 100px;
-	background: #27AE60;
+	background: #3276b1;
 	font-weight: bold;
 	color: white;
 	border: 0 none;
@@ -120,7 +162,7 @@ body {
 	margin: 10px 5px;
 }
 .msform .action-button:hover, .msform .action-button:focus {
-	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #3276b1;
 }
 /*headings*/
 .fs-title {
@@ -190,25 +232,92 @@ body {
 }
 
 .jumbotron.home {
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("Images/outdoor-events.jpg");
+    margin-top: -50px;
+    height: 100vh;
+    width: auto;
+    margin-left: 0;
+    margin-right: 0;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("Images/main-background.jpg") !important;
     background-position: center;
-    background-size: cover;
+    background-size: cover !important;
+    padding-top: 50vh;
+    margin-bottom: 0;
 }
-.jumbotron.home h1, .jumbotron.home p {
+.jumbotron.home p {
+    width: 55%;
+    margin: 20px auto;
+    margin-top: 100vh;
+    opacity: 0;
+    color: #e5e5e5;
+    text-align: center;
+}
+.jumbotron.home h1 {
     color: #FFFFFF;
+    text-align: center;
 }
 
 .body-content {
     background: #ebebeb;
+    min-height: 80vh;
 }
 
-.body-content .description-block h2, .body-content .description-block p {
-    color: #777;
+.body-content .description-block h2, .body-content .description-block-big h2 {
+    color: #e5e5e5;
+    font-size: 24px;
+}
+.body-content .description-block p, .body-content .description-block-big p {
+    color: #FFF;
+    font-size: 18px;
 }
 
-.body-content .description-block {
-    height: 188px;
+.body-content .description-block-big {
+    margin-top: 20px;
+    height: 380px;
+    padding: 88px 33px 0 33px;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("Images/groups.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
 }
 .body-content .description-block {
-    /*padding-left: 100px;*/
+    margin-top: 20px;
+    height: 180px;
+    padding: 2px 12px 0 12px;
+}
+
+.body-content .description-block.block-top {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("Images/tags.jpg") !important;
+}
+.body-content .description-block.block-bottom {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("Images/news.gif") !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+footer {
+    margin-top: 20px;
+}
+footer p {
+    margin-bottom: 0;
+    font-size: 18px;
+    padding-bottom: 8px;
+    padding-top: 14px;
+    border-top: 1px solid #999;
+}
+
+
+.about-block {
+    min-height: 78vh; 
+    padding-top: 24vh; 
+    color:#FFF;
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('Images/main-background.jpg') !important; 
+    background-position: center !important; 
+    background-size: cover !important;
+    margin-top: 24px;
+}
+
+.create-event {
+    overflow-x: hidden;
+}
+.create-event h2, .create-event h4 {
+    text-align: center;
 }
