@@ -188,3 +188,27 @@ body {
 .inline-element {
     display: inline-block;
 }
+
+.jumbotron.home {
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url("Images/outdoor-events.jpg");
+    background-position: center;
+    background-size: cover;
+}
+.jumbotron.home h1, .jumbotron.home p {
+    color: #FFFFFF;
+}
+
+.body-content {
+    background: #ebebeb;
+}
+
+.body-content .description-block h2, .body-content .description-block p {
+    color: #777;
+}
+
+.body-content .description-block {
+    height: 188px;
+}
+.body-content .description-block {
+    /*padding-left: 100px;*/
+}
