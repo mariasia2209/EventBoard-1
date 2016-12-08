@@ -73,6 +73,33 @@ namespace EventBoard.Presentation.Controllers
 
             return RedirectToAction("Index", "Event", new { eventId = eventId });
         }
+        static int ID;
+        [Authorize]
+        [HttpGet]
+        public ActionResult EditEvent(int eventId)
+        {
+            ID = eventId;
+            EventFullModel editEvent = EventService.GetEvent(eventId, User.Identity.Name);
+            EventNewViewModel newEvent = new EventNewViewModel();
+            newEvent.Name = editEvent.Name;
+            newEvent.Description = editEvent.Description;
+            newEvent.Category = editEvent.CategoryName;
+            newEvent.StartTime = Convert.ToDateTime(editEvent.StartDate);
+            newEvent.EndTime = Convert.ToDateTime(editEvent.EndDate);
+            newEvent.Location = "";
+            return View(newEvent);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult EditEvent(EventNewViewModel newEvent)
+        {
+            string userName = User.Identity.Name;
+
+            int eventId = EventService.UpdateEvent(newEvent, userName, ID);
+
+            return RedirectToAction("Index", "Event", new { eventId = eventId });
+        }
 
         [Authorize]
         [HttpPost]

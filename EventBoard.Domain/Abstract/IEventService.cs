@@ -8,6 +8,7 @@ namespace EventBoard.Domain
     {
         AllEventsModel GetAllEvents();
         int CreateNewEvent(EventNewViewModel newEventInfo, string userName);
+        int UpdateEvent(EventNewViewModel newEventInfo, string userName, int eventId);
         EventFullModel GetEvent(int eventId, string userName);
         CategoryEventsViewModel GetEventsByCategory(int categoryId);
         void AddNewComment(string userName, CommentNewViewModel comment);

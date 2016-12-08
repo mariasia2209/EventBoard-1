@@ -123,6 +123,38 @@ namespace EventBoard.Domain
             };
 
             Context.Events.Add(newEvent);
+            
+            Context.SaveChanges();
+
+            return newEvent.Id;
+        }
+
+        public int UpdateEvent(EventNewViewModel newEventInfo, string username, int eventId)
+        {
+            int? categoryId = Context.Categories
+                .Where(c => c.Name == newEventInfo.Category)
+                .Select(c => c.Id)
+                .FirstOrDefault();
+
+            if (categoryId == 0)
+            {
+                Category newCategory = new Category
+                {
+                    Name = newEventInfo.Category
+                };
+                Context.Categories.Add(newCategory);
+                Context.SaveChanges();
+                categoryId = newCategory.Id;
+            }
+            
+            var newEvent = Context.Events.Single(events => events.Id == eventId);
+            newEvent.CreationTime = DateTime.Now;
+            newEvent.EventBegin = newEventInfo.StartTime;
+            newEvent.EventEnd = newEventInfo.EndTime;
+            newEvent.Location = newEventInfo.Location;
+            newEvent.Description = newEventInfo.Description;
+            newEvent.Name = newEventInfo.Name;
+            newEvent.Category_Id = categoryId.Value;
 
             Context.SaveChanges();
 
