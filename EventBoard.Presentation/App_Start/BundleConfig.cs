@@ -32,7 +32,8 @@ namespace EventBoard.Presentation
 
             bundles.Add(new StyleBundle("~/bundles/CustomScript").Include(
                       "~/Scripts/register.js",
-                      "~/Scripts/heading_animate.js"));
+                      "~/Scripts/heading_animate.js",
+                      "~/Scripts/footer-hide.js"));
         }
     }
 }
