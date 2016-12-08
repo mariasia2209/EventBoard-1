@@ -18,55 +18,71 @@
     }
 </script>
 <br />
-<h2>Event Board</h2>
+<div class="events col-md-12">
+    <h1>Events</h1>
 
-Categories: @Model.Statistics.TotalCategoryCount <br />
-Tags: @Model.Statistics.TotalTagCount <br /> 
-Events: @Model.Statistics.TotalEventCount <br />
-News: @Model.Statistics.TotalNewsCount <br />
+    <div class="row top">
+        <div class="col-md-3">Categories: @Model.Statistics.TotalCategoryCount</div>
+        <div class="col-md-3">Tags: @Model.Statistics.TotalTagCount</div>
+        <div class="col-md-3">Events: @Model.Statistics.TotalEventCount</div>
+        <div class="col-md-3">News: @Model.Statistics.TotalNewsCount</div>
+    </div>
 
-<h3>All categories</h3>
-@foreach (var category in Model.Categories)
-{
-    @Html.ActionLink(category.Name, "Category", "Event",
+    <div class="col-md-offset-3">
+        <h3 style="margin: 33px 0 22px 262px">All categories</h3>
+        @foreach (var category in Model.Categories)
+        {
+            @Html.ActionLink(category.Name, "Category", "Event",
             new { categoryId = category.Id },
-            new { @class = "btn btn-default navbar-btn",
-                style = "margin: auto 6px auto auto;"})
-}
-<div>
-    <span>Search by name/description  </span>
-    <input type="text" onkeyup="filter(this)" />
-</div>
-<h3>All tags</h3>
-@foreach (var tag in Model.Tags)
-{
-    @Html.ActionLink(tag.Name, "Tag", "Event",
+            new
+            {
+                @class = "btn btn-default navbar-btn",
+                style = "margin: auto 6px auto auto;"
+            })
+        }
+    </div>
+    
+    <div class="row" style="margin-left: 0; margin-right: 0; padding-top: 30px">
+        <h3 style="display: inline-block; margin-left: 47%;">All tags</h3>
+        <div style="display: inline-block; float: right; margin-top: 22px">
+            <span>Search by name/description  </span>
+            <input type="text" onkeyup="filter(this)" />
+        </div>
+    </div>
+    @foreach (var tag in Model.Tags)
+    {
+        @Html.ActionLink(tag.Name, "Tag", "Event",
             new { tagId = tag.Id },
             new { @class = "btn btn-default navbar-btn" })
-}
+    }
 
-@foreach (var eve in Model.Events)
-{
-    <div class="showEvent">
-    <h3>
-        @Html.ActionLink(eve.Name, "Index", "Event",
+    <div class="col-md-offset-1 col-md-10 background: #e5e5e5;">
+        @foreach (var eve in Model.Events)
+        {
+            <div class="row showEvent col-md-6" style="padding: 12px;">
+                <h3 style="text-align: center;">
+                    @Html.ActionLink(eve.Name, "Index", "Event",
             new { eventId = eve.Id },
             new { @class = "" })
-    </h3>
+                </h3>
 
-    @if (eve.Image != null)
-    {
-    <img src="~/Content/Images/@eve.Image" alt="@eve.Name" />
-    }
-    <div class="showEventDes">Description: @eve.Description </div>
-    <div>Start: @eve.StartDate</div>
-    <div>End: @eve.EndDate</div>
-    <div>Category: @eve.Category</div>
+                @if (eve.Image != null)
+                {
+                    <img src="~/Content/Images/@eve.Image" alt="@eve.Name" style="width:92%; height: 333px; border-radius: 4px; margin: 0 4%;" />
+                }
+                <div style="margin: 0 2%; margin-left: 4%; padding-top: 12px;">
+                    <div class="showEventDes"><b>Description:</b> @eve.Description </div>
+                    <div><b>Start:</b> @eve.StartDate</div>
+                    <div><b>End:</b> @eve.EndDate</div>
+                    <div><b>Category:</b> @eve.Category</div>
 
 
-    <div>Count of likes:  @eve.Likes.Count</div>
+                    <div><b>Count of likes:</b>  @eve.Likes.Count</div>
 
-    <div>Comments: @eve.Comments.Count</div>
-    <div>Last commented: @eve.Comments.LastCommentDate</div>
+                    <div><b>Comments:</b> @eve.Comments.Count</div>
+                    <div><b>Last commented:</b> @eve.Comments.LastCommentDate</div>
+                </div>
+            </div>
+        }
     </div>
-}
+</div>
