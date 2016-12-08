@@ -4,7 +4,19 @@
 @{
     ViewBag.Title = "All Events";
 }
-
+<script>
+    function filter(element) {
+        var value = $(element).val();
+        $(".showEvent").each(function () {
+            if ($(this).find('h3').text().search(value) > -1 || $(this).find('.showEventDes').text().search(value) > -1) {
+                $(this).show();
+            }
+            else {
+                $(this).hide();
+            }
+        });
+    }
+</script>
 <br />
 <h2>Event Board</h2>
 
@@ -21,7 +33,10 @@ News: @Model.Statistics.TotalNewsCount <br />
             new { @class = "btn btn-default navbar-btn",
                 style = "margin: auto 6px auto auto;"})
 }
-
+<div>
+    <span>Search by name/description  </span>
+    <input type="text" onkeyup="filter(this)" />
+</div>
 <h3>All tags</h3>
 @foreach (var tag in Model.Tags)
 {
@@ -32,18 +47,18 @@ News: @Model.Statistics.TotalNewsCount <br />
 
 @foreach (var eve in Model.Events)
 {
-
+    <div class="showEvent">
     <h3>
         @Html.ActionLink(eve.Name, "Index", "Event",
             new { eventId = eve.Id },
             new { @class = "" })
     </h3>
 
-    if (@eve.Image != null)
+    @if (eve.Image != null)
     {
     <img src="~/Content/Images/@eve.Image" alt="@eve.Name" />
     }
-    <div>Description: @eve.Description </div>
+    <div class="showEventDes">Description: @eve.Description </div>
     <div>Start: @eve.StartDate</div>
     <div>End: @eve.EndDate</div>
     <div>Category: @eve.Category</div>
@@ -53,4 +68,5 @@ News: @Model.Statistics.TotalNewsCount <br />
 
     <div>Comments: @eve.Comments.Count</div>
     <div>Last commented: @eve.Comments.LastCommentDate</div>
+    </div>
 }
