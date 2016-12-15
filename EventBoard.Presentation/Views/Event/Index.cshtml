@@ -16,30 +16,51 @@
             }
         });
     }
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementByClassName("events")[0].style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementByClassName("events")[0].style.marginLeft = "0";
+    }
 </script>
-<br />
-<div class="events col-md-12">
-    <h1>Events</h1>
-
-    <div class="row top">
-        <div class="col-md-3">Categories: @Model.Statistics.TotalCategoryCount</div>
-        <div class="col-md-3">Tags: @Model.Statistics.TotalTagCount</div>
-        <div class="col-md-3">Events: @Model.Statistics.TotalEventCount</div>
-        <div class="col-md-3">News: @Model.Statistics.TotalNewsCount</div>
-    </div>
-
-    <div class="col-md-offset-3">
-        <h3 style="margin: 33px 0 22px 262px">All categories</h3>
-        @foreach (var category in Model.Categories)
-        {
-            @Html.ActionLink(category.Name, "Category", "Event",
+<div id="mySidenav" class="sidenav" style="padding-top: 122px;">
+    
+    @foreach (var category in Model.Categories)
+    {
+        @Html.ActionLink(category.Name, "Category", "Event",
             new { categoryId = category.Id },
             new
             {
                 @class = "btn btn-default navbar-btn",
                 style = "margin: auto 6px auto auto;"
             })
+    }
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+</div>
+<br />
+<div class="events col-md-12">
+    <span class="btn btn-primary btn-lg" style="font-size:18px;cursor:pointer; float: right;" onclick="openNav()">&#9776; All categories</span>
+    <h1>Events</h1>
+    <div class="row top">
+        <br />
+        <div style="display: inline-block; margin: 0 16px;">Categories: @Model.Statistics.TotalCategoryCount</div>
+        <div style="display: inline-block; margin: 0 16px;">Tags: @Model.Statistics.TotalTagCount</div>
+        <div style="display: inline-block; margin: 0 16px;">Events: @Model.Statistics.TotalEventCount</div>
+        <div style="display: inline-block; margin: 0 16px;">News: @Model.Statistics.TotalNewsCount</div>
+    </div>
+
+    <div class="col-md-offset-3">
+        @*<h3 style="margin: 33px 0 22px 262px">All categories</h3>*@
+        @foreach (var tag in Model.Tags)
+        {
+            @Html.ActionLink(tag.Name, "Tag", "Event",
+            new { tagId = tag.Id },
+            new { @class = "btn btn-default navbar-btn" })
         }
+        
     </div>
     
     <div class="row" style="margin-left: 0; margin-right: 0; padding-top: 30px">
@@ -49,12 +70,7 @@
             <input type="text" onkeyup="filter(this)" />
         </div>
     </div>
-    @foreach (var tag in Model.Tags)
-    {
-        @Html.ActionLink(tag.Name, "Tag", "Event",
-            new { tagId = tag.Id },
-            new { @class = "btn btn-default navbar-btn" })
-    }
+    
 
     <div class="col-md-offset-1 col-md-10 background: #e5e5e5;">
         @foreach (var eve in Model.Events)

@@ -4,13 +4,17 @@
     ViewBag.Title = "Category";
 }
 
-<h2>Category: <b>@Model.CategoryName</b></h2>
+<div class="text-center" style="padding-top: 50px;">
+    <h2>Category: <b>@Model.CategoryName</b></h2>
+</div>
 
-@foreach(var e in Model.Events)
-{
-<h3>@Html.ActionLink(e.Name, "Index", "Event", new { eventId = e.Id }, new { @class = "" })</h3>
-<h4>by @e.AuthorName <b>@e.AuthorSurname</b></h4>
-}
+<div class="col-md-offset-1 col-md-10 events">
+    @foreach (var e in Model.Events)
+    {
+        <h3>@Html.ActionLink(e.Name, "Index", "Event", new { eventId = e.Id }, new { @class = "" })</h3>
+        <h4>by @e.AuthorName <b>@e.AuthorSurname</b></h4>
+    }
+</div>
 
 
 
