@@ -17,5 +17,6 @@ namespace EventBoard.Presentation.Models
             public string FirstName { get; set; }
             public string LastName { get; set; }
             public string MobileNumber { get; set; }
-        }
+            public string Maximus { get; set; }
+    }
     }

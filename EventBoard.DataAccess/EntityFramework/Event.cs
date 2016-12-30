@@ -37,6 +37,9 @@ namespace EventBoard.DataAccess.EntityFramework
 
         public bool Suspended { get; set; }
 
+        [StringLength(10)]
+        public string maximumAmount { get; set; }
+
         [StringLength(128)]
         public string Creator_Id { get; set; }
 

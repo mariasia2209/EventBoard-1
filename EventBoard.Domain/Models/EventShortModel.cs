@@ -19,5 +19,6 @@ namespace EventBoard.Domain.Models
         public EventLikeCounterModel Likes { get; set; }
         public List<TagModel> Tags { get; set; }
         public EventCommentsSummaryModel Comments { get; set; }
+        public string maximumAmount { get; set; }
     }
 }

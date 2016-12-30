@@ -5,6 +5,18 @@
     ViewBag.Title = "All Events";
 }
 <script>
+    function countMaximum() {
+        var sum = 0;
+
+        $('.peopleAmount').each(function () {
+            if ($(this).text != "" || $(this.text != " ")) {
+                console.log($(this)[0].innerHTML);
+                sum += +$(this)[0].innerHTML;
+            }
+        })
+        $('#maximumAmount').text(sum);
+    }
+
     function filter(element) {
         var value = $(element).val();
         $(".showEvent").each(function () {
@@ -70,6 +82,11 @@
             <input type="text" onkeyup="filter(this)" />
         </div>
     </div>
+    <div class="row" style="margin-left: 0; margin-right: 0; padding-top: 30px">
+        <div style="display: inline-block; float: right; margin-top: 22px">
+            <span>Maximum amount of people on all events:  <b><h4 id="maximumAmount"></h4></b><input type="button" onclick="countMaximum()" value="Count" /></span>
+        </div>
+    </div>
     
 
     <div class="col-md-offset-1 col-md-10 background: #e5e5e5;">
@@ -97,6 +114,8 @@
 
                     <div><b>Comments:</b> @eve.Comments.Count</div>
                     <div><b>Last commented:</b> @eve.Comments.LastCommentDate</div>
+
+                    <div><b>Maximum amount of people to visit:</b><span class="peopleAmount">@eve.maximumAmount</span></div>
                 </div>
             </div>
         }

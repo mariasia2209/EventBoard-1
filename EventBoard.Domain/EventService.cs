@@ -35,6 +35,7 @@ namespace EventBoard.Domain
 
                 Name = e.Name,
                 Description = e.Description,
+                maximumAmount = e.maximumAmount,
 
                 Comments = new EventCommentsSummaryModel
                 {

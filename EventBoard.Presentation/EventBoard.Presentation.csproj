@@ -274,6 +274,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ClassDiagram1.cd" />
+    <Content Include="ClassDiagram2.cd" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\event.js" />
     <Content Include="Scripts\footer-hide.js" />
@@ -340,6 +342,7 @@
     <Content Include="Views\Manage\ChangeData.cshtml" />
     <Content Include="Views\Event\AddComment.cshtml" />
     <Content Include="Views\Event\EditEvent.cshtml" />
+    <Content Include="Views\Home\Maximus.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
