@@ -384,3 +384,10 @@ html {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+.disabled {
+    color: black !important;
+}
+.disabled:hover {
+    text-decoration: none;
+}

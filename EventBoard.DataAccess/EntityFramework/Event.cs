@@ -40,6 +40,9 @@ namespace EventBoard.DataAccess.EntityFramework
         [StringLength(10)]
         public string maximumAmount { get; set; }
 
+        [StringLength(10)]
+        public string status { get; set; }
+
         [StringLength(128)]
         public string Creator_Id { get; set; }
 

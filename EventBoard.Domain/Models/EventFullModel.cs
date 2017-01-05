@@ -8,6 +8,8 @@ namespace EventBoard.Domain.Models
 {
     public class EventFullModel
     {
+        public string status { get; set; }
+
         public int Id { get; set; }
         public CreatorModel Creator { get; set; }
         public DateTime CreationTime { get; set; }

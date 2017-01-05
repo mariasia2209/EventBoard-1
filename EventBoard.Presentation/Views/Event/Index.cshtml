@@ -5,16 +5,56 @@
     ViewBag.Title = "All Events";
 }
 <script>
-    function countMaximum() {
-        var sum = 0;
+    //function countMaximum() {
+    //    var sum = 0;
 
-        $('.peopleAmount').each(function () {
-            if ($(this).text != "" || $(this.text != " ")) {
-                console.log($(this)[0].innerHTML);
-                sum += +$(this)[0].innerHTML;
+    //    $('.peopleAmount').each(function () {
+    //        if ($(this).text != "" || $(this.text != " ")) {
+    //            console.log($(this)[0].innerHTML);
+    //            sum += +$(this)[0].innerHTML;
+    //        }
+    //    })
+    //    $('#maximumAmount').text(sum);
+    //}
+
+    //(function () {
+    //    $(document).ready(function () {
+    //        showStatus();
+    //    });
+    //})();
+
+    function showActive() {
+        $('.statusSpan').each(function () {
+            var showEventBlock = $($(this)[0]).parent().parent().parent().parent();
+            if ($(this)[0].innerText == "passive") {
+                showEventBlock.css('display', 'none');
+            } else {
+                showEventBlock.css('display', 'block');
             }
         })
-        $('#maximumAmount').text(sum);
+    }
+
+    function showPassive() {
+        $('.statusSpan').each(function () {
+            var showEventBlock = $($(this)[0]).parent().parent().parent().parent();
+            var authorSpan = showEventBlock.find('.authorSpan')[0];
+            //console.log($('#authorSurname').val());
+            //console.log(authorSpan.innerText);
+
+            console.log("1" + authorSpan.innerText + "1");
+
+            if ($('#authorSurname').val() == authorSpan.innerText && $(this)[0].innerText == "passive") {
+                console.log('yeee');
+                showEventBlock.css('display', 'block');
+                showEventBlock.find('.eventName').attr('href', '#').css('color', 'black');
+            } else if ($(this)[0].innerText == "passive" && $('#authorSurname').val() === "") {
+                console.log('yee2');
+                showEventBlock.css('display', 'block');
+            } else {
+                showEventBlock.css('display', 'none');
+      
+            }
+        })
     }
 
     function filter(element) {
@@ -37,6 +77,8 @@
         document.getElementById("mySidenav").style.width = "0";
         document.getElementByClassName("events")[0].style.marginLeft = "0";
     }
+
+   
 </script>
 <div id="mySidenav" class="sidenav" style="padding-top: 122px;">
     
@@ -84,19 +126,22 @@
     </div>
     <div class="row" style="margin-left: 0; margin-right: 0; padding-top: 30px">
         <div style="display: inline-block; float: right; margin-top: 22px">
-            <span>Maximum amount of people on all events:  <b><h4 id="maximumAmount"></h4></b><input type="button" onclick="countMaximum()" value="Count" /></span>
+            @*<span>Search by name/description  </span>*@
+            <input type="text" placeholder="author surname" id="authorSurname" />
+            <input type="button" onclick="showActive()" value="Show Active Events"/>
+            <input type="button" onclick="showPassive()" value="Show Passive Events" />
         </div>
     </div>
-    
 
     <div class="col-md-offset-1 col-md-10 background: #e5e5e5;">
         @foreach (var eve in Model.Events)
         {
             <div class="row showEvent col-md-6" style="padding: 12px;">
+              
                 <h3 style="text-align: center;">
                     @Html.ActionLink(eve.Name, "Index", "Event",
-            new { eventId = eve.Id },
-            new { @class = "" })
+                        new { eventId = eve.Id },
+                        new { @class = "eventName" })
                 </h3>
 
                 @if (eve.Image != null)
@@ -115,7 +160,9 @@
                     <div><b>Comments:</b> @eve.Comments.Count</div>
                     <div><b>Last commented:</b> @eve.Comments.LastCommentDate</div>
 
-                    <div><b>Maximum amount of people to visit:</b><span class="peopleAmount">@eve.maximumAmount</span></div>
+                    <div>Status:<b><span class="statusSpan">@eve.status</span></b></div>
+                    <div>Id:<b><span class="authorSpan">@eve.Creator.SecondName</span></b></div>
+                  
                 </div>
             </div>
         }

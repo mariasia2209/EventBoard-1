@@ -20,5 +20,7 @@ namespace EventBoard.Domain.Models
         public List<TagModel> Tags { get; set; }
         public EventCommentsSummaryModel Comments { get; set; }
         public string maximumAmount { get; set; }
+        public string status { get; set; }
+        public string Creator_Id { get; set; }
     }
 }
