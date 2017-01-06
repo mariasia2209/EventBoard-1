@@ -13,5 +13,8 @@ namespace EventBoard.Domain
         CategoryEventsViewModel GetEventsByCategory(int categoryId);
         void AddNewComment(string userName, CommentNewViewModel comment);
         void AddLike(int eventId, string userName);
+        int get_events_num(string userId);
+        int get_comments_num(string userId);
+        int get_locked_comments_num(string userId);
     }
 }

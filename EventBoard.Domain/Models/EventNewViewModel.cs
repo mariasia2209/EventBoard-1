@@ -36,5 +36,9 @@ namespace EventBoard.Domain.Models
         [Required]
         [Display(Name = "Location")]
         public string Location { get; set; }
+
+        [Required]
+        [Display(Name = "Locked")]
+        public bool Suspended { get; set; }
     }  
 }

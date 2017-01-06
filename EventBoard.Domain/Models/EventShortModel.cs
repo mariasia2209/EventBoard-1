@@ -20,5 +20,6 @@ namespace EventBoard.Domain.Models
         public List<TagModel> Tags { get; set; }
         public EventCommentsSummaryModel Comments { get; set; }
         public string maximumAmount { get; set; }
+        public bool Suspended { get; set; }
     }
 }

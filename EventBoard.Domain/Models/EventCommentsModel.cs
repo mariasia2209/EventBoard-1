@@ -12,5 +12,6 @@ namespace EventBoard.Domain.Models
         public DateTime Time { get; set; }
         public string Text { get; set; }
         public UserShortModel User { get; set; }
+        public bool Suspended { get; set; }
     }
 }

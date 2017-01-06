@@ -13,5 +13,6 @@ namespace EventBoard.Domain.Models
         public string AuthorId { get; set; }
         public string AuthorName { get; set; }
         public string AuthorSurname { get; set; }
+        public bool Suspended { get; set; }
     }
 }

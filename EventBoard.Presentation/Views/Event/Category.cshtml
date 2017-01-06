@@ -11,8 +11,13 @@
 <div class="col-md-offset-1 col-md-10 events">
     @foreach (var e in Model.Events)
     {
-        <h3>@Html.ActionLink(e.Name, "Index", "Event", new { eventId = e.Id }, new { @class = "" })</h3>
+        <h3>@Html.ActionLink(e.Name, "Index", "Event", new { eventId = e.Id }, new { @class = "" })
+        @if (e.Suspended) {
+        <text> (Locked)</text>
+        }
+        </h3>
         <h4>by @e.AuthorName <b>@e.AuthorSurname</b></h4>
+        
     }
 </div>
 

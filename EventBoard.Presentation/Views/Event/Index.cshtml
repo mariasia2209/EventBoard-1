@@ -97,6 +97,10 @@
                     @Html.ActionLink(eve.Name, "Index", "Event",
             new { eventId = eve.Id },
             new { @class = "" })
+                    @if (eve.Suspended)
+                    {
+                        <text> (Locked)</text>
+                    }
                 </h3>
 
                 @if (eve.Image != null)
@@ -108,7 +112,7 @@
                     <div><b>Start:</b> @eve.StartDate</div>
                     <div><b>End:</b> @eve.EndDate</div>
                     <div><b>Category:</b> @eve.Category</div>
-
+                    
 
                     <div><b>Count of likes:</b>  @eve.Likes.Count</div>
 

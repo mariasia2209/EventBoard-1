@@ -13,6 +13,9 @@ namespace EventBoard.Presentation.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+        public int events_num { get; set; }
+        public int comments_nul { get; set; }
+        public int locked_comments_num { get; set; }
     }
 
     public class ManageLoginsViewModel

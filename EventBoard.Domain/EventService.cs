@@ -32,7 +32,7 @@ namespace EventBoard.Domain
                 EndDate = e.EventEnd,
                 Category = e.Category.Name,
                 Image = e.Image,
-
+                Suspended = e.Suspended,
                 Name = e.Name,
                 Description = e.Description,
                 maximumAmount = e.maximumAmount,
@@ -117,7 +117,7 @@ namespace EventBoard.Domain
                 EventBegin = newEventInfo.StartTime,
                 EventEnd = newEventInfo.EndTime,
                 Location = newEventInfo.Location,
-
+                Suspended = false,
                 Description = newEventInfo.Description,
                 Name = newEventInfo.Name,
                 Category_Id = categoryId.Value
@@ -136,6 +136,9 @@ namespace EventBoard.Domain
                 .Where(c => c.Name == newEventInfo.Category)
                 .Select(c => c.Id)
                 .FirstOrDefault();
+            //Extract event here not to add categories for suspended Event
+            var newEvent = Context.Events.Single(events => events.Id == eventId);
+            if (newEvent.Suspended) return newEvent.Id;// Do not modify SUSPENDED event
 
             if (categoryId == 0)
             {
@@ -148,7 +151,7 @@ namespace EventBoard.Domain
                 categoryId = newCategory.Id;
             }
             
-            var newEvent = Context.Events.Single(events => events.Id == eventId);
+            
             newEvent.CreationTime = DateTime.Now;
             newEvent.EventBegin = newEventInfo.StartTime;
             newEvent.EventEnd = newEventInfo.EndTime;
@@ -156,7 +159,7 @@ namespace EventBoard.Domain
             newEvent.Description = newEventInfo.Description;
             newEvent.Name = newEventInfo.Name;
             newEvent.Category_Id = categoryId.Value;
-
+            newEvent.Suspended = newEventInfo.Suspended;
             Context.SaveChanges();
 
             return newEvent.Id;
@@ -185,6 +188,7 @@ namespace EventBoard.Domain
                     Name = e.Name,
                     Image = e.Image,
                     Description = e.Description,
+                    Suspended = e.Suspended,
                     Likes = new EventLikeCounterModel
                     {
                         Count = e.Likes.Count,
@@ -207,6 +211,7 @@ namespace EventBoard.Domain
                         Id = c.Id,
                         Time = c.Time,
                         Text = c.Text,
+                        Suspended=c.Suspended,
                         User = new UserShortModel
                         {
                             Id = c.User.Id,
@@ -234,7 +239,8 @@ namespace EventBoard.Domain
                         Name = e.Name,
                         AuthorId = e.User.Id,
                         AuthorName = e.User.FirstName,
-                        AuthorSurname = e.User.SecondName
+                        AuthorSurname = e.User.SecondName,
+                        Suspended = e.Suspended
                     }).ToList()
                 }).FirstOrDefault();
 
@@ -247,17 +253,16 @@ namespace EventBoard.Domain
                 .Where(u => u.UserName == userName)
                 .Select(u => u.Id)
                 .FirstOrDefault();
-
-            if (userId == null || comment.EventId == null)
+            if (userId == null || comment.EventId == null )
             {
                 return;
             }
-
+            var newEvent = Context.Events.Single(events => events.Id == comment.EventId);
             Comment newComment = new Comment
             {
                 Time = DateTime.Now,
                 Text = comment.Text,
-                Suspended = false,
+                Suspended = newEvent.Suspended,
                 Creator_Id = userId,
                 Event_Id = (int)comment.EventId
             };
@@ -274,7 +279,10 @@ namespace EventBoard.Domain
             {
                 return;
             }
-
+            //Extract event here not to add categories for suspended Event
+            var newEvent = Context.Events.Single(events => events.Id == eventId);
+            if (newEvent.Suspended) return;
+            // Do not modify SUSPENDED event
             string userId = Context.Users
                 .Where(u => u.UserName == userName)
                 .Select(u => u.Id)
@@ -304,6 +312,18 @@ namespace EventBoard.Domain
             }
             
             Context.SaveChanges();
+        }
+        public int get_events_num(string userId)
+        {
+            return Context.Events.Where(l => l.User.Id == userId.ToString()).Count();
+        }
+        public int get_comments_num(string userId)
+        {
+        return Context.Comments.Where(l => l.User.Id == userId.ToString()).Count();
+        }
+        public int get_locked_comments_num(string userId)
+        {
+            return Context.Comments.Where(l => l.User.Id == userId.ToString() && l.Suspended==true).Count();
         }
     }
 }

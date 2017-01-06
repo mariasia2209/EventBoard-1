@@ -40,7 +40,6 @@ namespace EventBoard.Presentation.Controllers
 
         public ActionResult Tag(int? tagId)
         {
-
             return View(tagId);
         }
 
@@ -87,6 +86,7 @@ namespace EventBoard.Presentation.Controllers
             newEvent.StartTime = Convert.ToDateTime(editEvent.StartDate);
             newEvent.EndTime = Convert.ToDateTime(editEvent.EndDate);
             newEvent.Location = "";
+            newEvent.Suspended = editEvent.Suspended;
             return View(newEvent);
         }
 

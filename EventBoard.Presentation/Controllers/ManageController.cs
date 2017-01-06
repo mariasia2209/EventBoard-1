@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EventBoard.Presentation.Models;
+using EventBoard.Domain;
 
 namespace EventBoard.Presentation.Controllers
 {
@@ -15,15 +16,17 @@ namespace EventBoard.Presentation.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private readonly IEventService EventService;
+        
         public ManageController()
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IEventService eventService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            EventService = eventService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -70,7 +73,11 @@ namespace EventBoard.Presentation.Controllers
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                /*events_num = EventService.get_events_num(userId),
+                comments_nul= EventService.get_comments_num(userId),
+                locked_comments_num=EventService.get_locked_comments_num(userId)*/
+                events_num = 0, comments_nul = 0, locked_comments_num = 0
             };
             return View(model);
         }

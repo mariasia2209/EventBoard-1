@@ -18,6 +18,7 @@ namespace EventBoard.Presentation.Models
             public string Image { get; set; }
             public string Description { get; set; }
             public bool IsLikedByCurrentUser { get; set; }
-        }
+            public bool Suspended { get; set; }
+    }
     
 }
