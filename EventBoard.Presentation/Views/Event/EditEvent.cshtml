@@ -15,47 +15,47 @@
         <div class="row">
             <div class="col-md-offset-2 col-md-5">
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Description, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @style = "height: 200px;" })
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Category, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Category, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(m => m.Category, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.StartTime, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.StartTime, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(model => model.StartTime, new { @Value = Model.StartTime.ToString("yyyy-MM-dd HH:mm"), @class = "form-control datepicker", placeholder = "Enter drop-off date here" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.EndTime, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.EndTime, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(model => model.EndTime, new { @Value = Model.StartTime.ToString("yyyy-MM-dd HH:mm"), @class = "form-control datepicker", placeholder = "Enter drop-off date here" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Location, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Location, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-8">
                         @Html.TextBoxFor(m => m.Location, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.status, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.status, new { @class = "form-control" })
+                    @Html.LabelFor(m => m.Suspended, new { @class = "col-md-4 control-label" })
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(m => m.Suspended, new { @class = "form-control", @style = "-webkit-box-shadow:inset 0 0px 0px rgba(0, 0, 0, 0.075); box-shadow:inset 0px 0px 0px rgba(0,0,0,0.075); background-color: rgba(0,0,0,0);" })
                     </div>
                 </div>
             </div>

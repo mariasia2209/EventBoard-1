@@ -87,10 +87,6 @@ namespace EventBoard.Presentation.Models
         [Required]
         [Display(Name = "Gender")]
         public Sex Sex { get; set; }
-
-        [Required]
-        [Display(Name = "MaximuSS")]
-        public string Maximus { get; set; }
     }
 
     public class AddPhoneNumberViewModel

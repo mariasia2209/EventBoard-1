@@ -3,8 +3,6 @@ namespace EventBoard.DataAccess.EntityFramework
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
     public partial class Event
     {
@@ -36,12 +34,6 @@ namespace EventBoard.DataAccess.EntityFramework
         public string Description { get; set; }
 
         public bool Suspended { get; set; }
-
-        [StringLength(10)]
-        public string maximumAmount { get; set; }
-
-        [StringLength(10)]
-        public string status { get; set; }
 
         [StringLength(128)]
         public string Creator_Id { get; set; }

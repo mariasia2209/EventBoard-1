@@ -38,7 +38,7 @@ namespace EventBoard.Domain.Models
         public string Location { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
-        public string status { get; set; }
+        [Display(Name = "Deactivate")]
+        public bool Suspended { get; set; }
     }  
 }

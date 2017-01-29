@@ -8,8 +8,6 @@ namespace EventBoard.Domain.Models
 {
     public class EventFullModel
     {
-        public string status { get; set; }
-
         public int Id { get; set; }
         public CreatorModel Creator { get; set; }
         public DateTime CreationTime { get; set; }
@@ -24,5 +22,6 @@ namespace EventBoard.Domain.Models
         public List<TagModel> Tags { get; set; }
         public List<EventCommentModel> Comments { get; set; }
         public bool IsLikedByCurrentUser { get; set; }
+        public bool Suspended { get; set; }
     }
 }

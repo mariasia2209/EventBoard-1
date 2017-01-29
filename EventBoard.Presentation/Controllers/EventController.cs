@@ -87,7 +87,7 @@ namespace EventBoard.Presentation.Controllers
             newEvent.StartTime = Convert.ToDateTime(editEvent.StartDate);
             newEvent.EndTime = Convert.ToDateTime(editEvent.EndDate);
             newEvent.Location = "";
-            newEvent.status = editEvent.status;
+            newEvent.Suspended = editEvent.Suspended;
             return View(newEvent);
         }
 

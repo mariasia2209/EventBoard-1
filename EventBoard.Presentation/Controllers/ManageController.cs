@@ -345,9 +345,9 @@ namespace EventBoard.Presentation.Controllers
             model.Email = user.Email;
             model.BirthDate = Convert.ToDateTime(user.BirthDate);
             model.PhoneNumber = user.PhoneNumber;
-            model.Maximus = user.Maximus;
+            //model.Sex = user.Sex;
 
-
+            
             return View(model);
         }
 
@@ -365,10 +365,9 @@ namespace EventBoard.Presentation.Controllers
                 user.FirstName = userprofile.FirstName;
                 user.SecondName = userprofile.SecondName;
                 user.Email = userprofile.Email;
-                //user.BirthDate = userprofile.BirthDate;
+                user.BirthDate = userprofile.BirthDate;
                 user.PhoneNumber = userprofile.PhoneNumber;
                 //db.Entry(user).State = EntityState.Modified;
-                user.Maximus = userprofile.Maximus;
 
                 //db.SaveChanges();
                 UserManager.Update(user);

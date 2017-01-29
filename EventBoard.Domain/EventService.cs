@@ -35,8 +35,8 @@ namespace EventBoard.Domain
 
                 Name = e.Name,
                 Description = e.Description,
-                maximumAmount = e.maximumAmount,
-                status = e.status,
+
+                Suspended = e.Suspended,
 
                 Comments = new EventCommentsSummaryModel
                 {
@@ -157,7 +157,7 @@ namespace EventBoard.Domain
             newEvent.Description = newEventInfo.Description;
             newEvent.Name = newEventInfo.Name;
             newEvent.Category_Id = categoryId.Value;
-            newEvent.status = newEventInfo.status;
+            newEvent.Suspended = newEventInfo.Suspended;
 
             Context.SaveChanges();
 
@@ -186,7 +186,7 @@ namespace EventBoard.Domain
                     CategoryName = e.Category.Name,
                     Name = e.Name,
                     Image = e.Image,
-                    status = e.status,
+                    Suspended = e.Suspended,
                     Description = e.Description,
                     Likes = new EventLikeCounterModel
                     {
