@@ -391,3 +391,18 @@ html {
 .disabled:hover {
     text-decoration: none;
 }
+
+.btn-danger:hover {
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.newsDetails {
+    font-size:11px;
+}
+
+.newsHeading {
+    color:#357ebd;
+    font-size:25px;
+    text-transform: uppercase;
+}

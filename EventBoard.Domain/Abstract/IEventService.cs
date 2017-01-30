@@ -6,6 +6,7 @@ namespace EventBoard.Domain
 {
     public interface IEventService
     {
+        List<FullNews> GetNewsForUser(string userName);
         AllEventsModel GetAllEvents();
         int CreateNewEvent(EventNewViewModel newEventInfo, string userName);
         int UpdateEvent(EventNewViewModel newEventInfo, string userName, int eventId);

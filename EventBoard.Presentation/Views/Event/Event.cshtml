@@ -6,7 +6,10 @@
 <div class="event col-md-12" style="padding-top: 30px">
     <h2 style="text-align:center;">@Model.Name</h2>
     <h4 style="float: right;">by @Model.Creator.FirstName <b>@Model.Creator.SecondName</b></h4>
-    <div class="btn btn-danger">@Html.ActionLink("Edit event", "EditEvent", new { eventId = Model.Id })</div>
+    @if (Model.Creator.Login == User.Identity.Name)
+    {
+        @Html.ActionLink("Edit event", "EditEvent", new { eventId = Model.Id }, new { @class = "btn btn-danger" })
+    }
     <div>
         @Html.ActionLink(@Model.CategoryName, "Category", "Event",
             new { categoryId = @Model.CategoryId },

@@ -20,6 +20,21 @@ namespace EventBoard.Domain.Models
         public List<TagModel> Tags { get; set; }
         public EventCommentsSummaryModel Comments { get; set; }
         public bool Suspended { get; set; }
+        public string Status
+        {
+            get
+            {
+                return Suspended ? "Inactive" : "Active";
+            }
+        }
+        public string ShortDescription
+        {
+            get
+            {
+                int expectedSize = 120;
+                return Description == null ? "" : Description.Length > expectedSize ? Description.Substring(0, Description.Substring(0, expectedSize - 3).LastIndexOf(' ')) + "...": Description;
+            }
+        }
         public string Creator_Id { get; set; }
     }
 }

@@ -96,14 +96,13 @@
 </div>
 <br />
 <div class="events col-md-12">
-    <span class="btn btn-primary btn-lg" style="font-size:18px;cursor:pointer; float: right;" onclick="openNav()">&#9776; All categories</span>
+    <span class="btn btn-primary btn-lg" style="font-size:18px;cursor:pointer; float: right; max-width=400px;" onclick="openNav()">&#9776; All categories</span>
     <h1>Events</h1>
     <div class="row top">
-        <br />
-        <div style="display: inline-block; margin: 0 16px;">Categories: @Model.Statistics.TotalCategoryCount</div>
-        <div style="display: inline-block; margin: 0 16px;">Tags: @Model.Statistics.TotalTagCount</div>
-        <div style="display: inline-block; margin: 0 16px;">Events: @Model.Statistics.TotalEventCount</div>
-        <div style="display: inline-block; margin: 0 16px;">News: @Model.Statistics.TotalNewsCount</div>
+        <div style="display: inline-block; padding:6px; margin:4px; border-radius: 6px; background:#ffffff;">Categories: @Model.Statistics.TotalCategoryCount</div>
+        <div style="display: inline-block; padding:6px; margin:4px; border-radius: 6px; background:#ffffff;">Tags: @Model.Statistics.TotalTagCount</div>
+        <div style="display: inline-block; padding:6px; margin:4px; border-radius: 6px; background:#ffffff;">Events: @Model.Statistics.TotalEventCount</div>
+        <div style="display: inline-block; padding:6px; margin:4px; border-radius: 6px; background:#ffffff;">News: @Model.Statistics.TotalNewsCount</div>
     </div>
 
     <div class="col-md-offset-3">
@@ -118,7 +117,7 @@
     </div>
     
     <div class="row" style="margin-left: 0; margin-right: 0; padding-top: 30px">
-        <h3 style="display: inline-block; margin-left: 47%;">All tags</h3>
+        @*<h3 style="display: inline-block; margin-left: 47%;">All tags</h3>*@
         <div style="display: inline-block; float: right; margin-top: 22px">
             <span>Search by name/description  </span>
             <input type="text" onkeyup="filter(this)" />
@@ -133,10 +132,10 @@
         </div>
     </div>
 
-    <div class="col-md-offset-1 col-md-10 background: #e5e5e5;">
+    <div class="col-md-12" style="padding-left:initial; padding-right:initial;">
         @foreach (var eve in Model.Events)
         {
-            <div class="row showEvent col-md-6" style="padding: 12px;">
+            <div class="row showEvent col-md-6" style="padding: 1px 1px 20px 1px; margin:11px; border-radius: 6px; background:#ffffff; max-width:600px;">
               
                 <h3 style="text-align: center;">
                     @Html.ActionLink(eve.Name, "Index", "Event",
@@ -146,10 +145,10 @@
 
                 @if (eve.Image != null)
                 {
-                    <img src="~/Content/Images/@eve.Image" alt="@eve.Name" style="width:92%; height: 333px; border-radius: 4px; margin: 0 4%;" />
+                    <img src="~/Content/Images/@eve.Image" alt="@eve.Name" style="width:92%; height: 333px; border-radius: 4px; margin: 0 4%; max-width:530px;" />
                 }
-                <div style="margin: 0 2%; margin-left: 4%; padding-top: 12px;">
-                    <div class="showEventDes"><b>Description:</b> @eve.Description </div>
+                <div style="margin: 0 2%; margin-left: 4%; padding-top: 12px;" >
+                    <div class="showEventDes"><b>Description:</b> @eve.ShortDescription </div>
                     <div><b>Start:</b> @eve.StartDate</div>
                     <div><b>End:</b> @eve.EndDate</div>
                     <div><b>Category:</b> @eve.Category</div>
@@ -160,8 +159,8 @@
                     <div><b>Comments:</b> @eve.Comments.Count</div>
                     <div><b>Last commented:</b> @eve.Comments.LastCommentDate</div>
 
-                    <div>Status:<b><span class="statusSpan">@eve.Suspended ? "Passive": "Active"</span></b></div>
-                    <div>Id:<b><span class="authorSpan">@eve.Creator.SecondName</span></b></div>
+                    <div><b>Status:</b> <span class="statusSpan">@eve.Status</span></div>
+                    <div><b>Author:</b> <span class="authorSpan">@eve.Creator.SecondName @eve.Creator.FirstName</span></div>
                   
                 </div>
             </div>

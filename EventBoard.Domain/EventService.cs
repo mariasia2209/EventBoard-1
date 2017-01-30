@@ -13,6 +13,43 @@ namespace EventBoard.Domain
         {
             Context = context;
         }
+               
+
+        public List<FullNews> GetNewsForUser(string userName)
+        {
+            List<FullNews> allNews = Context.Events
+                .Where(eve => eve.EventSubscriptions.Any(sub => ((sub.User.UserName == userName && sub.Suspended == false) || userName == null)
+                    && !sub.Event.Suspended))
+                .SelectMany(eve => eve.News)
+                .Select(news => new FullNews
+                {
+                    Id = news.Id,
+                    Heading = news.Heading,
+                    Description = news.Description,
+                    Image = news.Image,
+                    Time = news.Time,
+                    Event = new EventHeaderModel
+                    {
+                        Id = news.Event.Id,
+                        Name = news.Event.Name,
+                        AuthorId = news.Event.Creator_Id,
+                        AuthorName = news.Event.User.FirstName,
+                        AuthorSurname = news.Event.User.SecondName
+                    },
+                    User = new CreatorModel
+                    {
+                        Id = news.Author_Id,
+                        FirstName = news.User.FirstName,
+                        SecondName = news.User.SecondName,
+                        Login = news.User.UserName,
+                        Sex = news.User.Sex,
+                        Image = news.User.Image
+                    }
+                })
+                .ToList();
+
+            return allNews;
+        }
 
         public AllEventsModel GetAllEvents()
         {
@@ -24,6 +61,7 @@ namespace EventBoard.Domain
                     Id = e.User.Id,
                     FirstName = e.User.FirstName,
                     SecondName = e.User.SecondName,
+                    Login = e.User.UserName,
                     Sex = e.User.Sex,
                     Image = e.User.Image
                 },
@@ -176,6 +214,7 @@ namespace EventBoard.Domain
                         Id = e.User.Id,
                         FirstName = e.User.FirstName,
                         SecondName = e.User.SecondName,
+                        Login = e.User.UserName,
                         Sex = e.User.Sex,
                         Image = e.User.Image
                     },

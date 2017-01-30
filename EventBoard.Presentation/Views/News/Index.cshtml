@@ -1,0 +1,25 @@
+﻿@using EventBoard.Domain.Models
+@model List<FullNews>
+
+@{
+    ViewBag.Title = "News";
+}
+
+<div style="margin-left:auto; margin-left:auto; padding-left:initial; padding-right:initial;">
+    @foreach (var news in Model)
+    {
+        <div style="padding: 10px; margin:10px; border-radius: 6px; background:#ffffff; max-width:800px;">
+            <div style="margin: 0 2%; margin-left: 4%; padding-top: 12px;">
+                <div class="newsHeading">@news.Heading</div>
+                <div> @news.Description</div>
+                <div class="newsDetails"><b>Posted:</b> at @news.Time by @news.User.SecondName @news.User.FirstName</div>
+                <div class="newsDetails">
+                    <b>Related To:</b>
+                        @Html.ActionLink(news.Event.Name, "Index", "Event",
+                    new { eventId = news.Event.Id })
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

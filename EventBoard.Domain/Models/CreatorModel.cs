@@ -11,6 +11,7 @@ namespace EventBoard.Domain.Models
         public string Id { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
+        public string Login { get; set; }
         public short? Sex { get; set; }
         public string Image { get; set; }
     }

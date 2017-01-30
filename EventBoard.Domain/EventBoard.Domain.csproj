@@ -74,6 +74,7 @@
     <Compile Include="Models\EventLikeCounterModel.cs" />
     <Compile Include="Models\EventsSummaryModel.cs" />
     <Compile Include="Models\EventFullModel.cs" />
+    <Compile Include="Models\FullNews.cs" />
     <Compile Include="Models\TagModel.cs" />
     <Compile Include="Models\UserShortModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
