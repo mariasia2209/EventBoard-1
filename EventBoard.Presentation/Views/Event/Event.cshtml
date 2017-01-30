@@ -59,7 +59,7 @@
             @foreach (var comment in Model.Comments)
             {
                 <div class="panel panel-default">
-                    <div class="panel-heading">@comment.User.FirstName <b>@comment.User.SecondName</b> - @comment.Time.ToLocalTime()
+                    <div class="panel-heading"><a href="/Event/Userevents?userid=@comment.User.Id">@comment.User.FirstName <b>@comment.User.SecondName</b></a> - @comment.Time.ToLocalTime()
                     @if (comment.Suspended)
                     {<text> (Made after locking the event)</text> }
                     </div>

@@ -13,5 +13,6 @@ namespace EventBoard.Domain.Models
         public string SecondName { get; set; }
         public short? Sex { get; set; }
         public string Image { get; set; }
+        public string Link { get { return "/Event/Userevents?userid=@" + Id; } }
     }
 }

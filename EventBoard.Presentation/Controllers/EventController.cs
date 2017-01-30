@@ -37,7 +37,15 @@ namespace EventBoard.Presentation.Controllers
                 return View("Event", eventFullModel);
             }
         }
-
+        public ActionResult UserEvents(string UserId)
+        {
+            AllEventsModel events = EventService.EventsByUser(UserId);
+            ViewBag.CommentsNum = EventService.get_events_num(UserId);
+            ViewBag.LockedCommentsNum = EventService.get_locked_comments_num(UserId);
+            ViewBag.EventsNum = EventService.get_events_num(UserId);
+            ViewBag.UserName = EventService.get_user_name(UserId);
+            return View(events);
+        }
         public ActionResult Tag(int? tagId)
         {
             return View(tagId);

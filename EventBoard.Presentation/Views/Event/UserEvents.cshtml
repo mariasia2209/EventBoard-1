@@ -2,7 +2,7 @@
 @model AllEventsModel
 
 @{
-    ViewBag.Title = "All Events";
+    ViewBag.Title = "UserEvents";
 }
 <script>
     function countMaximum() {
@@ -39,7 +39,7 @@
     }
 </script>
 <div id="mySidenav" class="sidenav" style="padding-top: 122px;">
-    
+
     @foreach (var category in Model.Categories)
     {
         @Html.ActionLink(category.Name, "Category", "Event",
@@ -55,7 +55,7 @@
 <br />
 <div class="events col-md-12">
     <span class="btn btn-primary btn-lg" style="font-size:18px;cursor:pointer; float: right;" onclick="openNav()">&#9776; All categories</span>
-    <h1>Events</h1>
+    <h1>Events created by @ViewBag.UserName</h1>
     <div class="row top">
         <br />
         <div style="display: inline-block; margin: 0 16px;">Categories: @Model.Statistics.TotalCategoryCount</div>
@@ -63,7 +63,12 @@
         <div style="display: inline-block; margin: 0 16px;">Events: @Model.Statistics.TotalEventCount</div>
         <div style="display: inline-block; margin: 0 16px;">News: @Model.Statistics.TotalNewsCount</div>
     </div>
-
+    <div class="row top">
+        <br/>
+        <div style="display: inline-block; margin: 0 16px;">This user created @ViewBag.EventsNum events</div>
+        <div style="display: inline-block; margin: 0 16px;">This user made @ViewBag.CommentsNum comments</div>
+        <div style="display: inline-block; margin: 0 16px;">This user made @ViewBag.LockedCommentsNum comments to locked events</div>
+    </div>
     <div class="col-md-offset-3">
         @*<h3 style="margin: 33px 0 22px 262px">All categories</h3>*@
         @foreach (var tag in Model.Tags)
@@ -72,9 +77,9 @@
             new { tagId = tag.Id },
             new { @class = "btn btn-default navbar-btn" })
         }
-        
+
     </div>
-    
+
     <div class="row" style="margin-left: 0; margin-right: 0; padding-top: 30px">
         <h3 style="display: inline-block; margin-left: 47%;">All tags</h3>
         <div style="display: inline-block; float: right; margin-top: 22px">
@@ -87,7 +92,7 @@
             <span>Maximum amount of people on all events:  <b><h4 id="maximumAmount"></h4></b><input type="button" onclick="countMaximum()" value="Count" /></span>
         </div>
     </div>
-    
+
 
     <div class="col-md-offset-1 col-md-10 background: #e5e5e5;">
         @foreach (var eve in Model.Events)
@@ -109,8 +114,7 @@
                 }
                 <div style="margin: 0 2%; margin-left: 4%; padding-top: 12px;">
                     <div class="showEventDes"><b>Description:</b> @eve.Description </div>
-                    <div><b>Autor:</b><a href="@eve.Creator.Link">
-                        @eve.Creator.FirstName @eve.Creator.SecondName</a></div>
+                    <div><b>Autor:</b>@eve.Creator.FirstName @eve.Creator.SecondName </div>
                     <div><b>Start:</b> @eve.StartDate</div>
                     <div><b>End:</b> @eve.EndDate</div>
                     <div><b>Category:</b> @eve.Category</div>

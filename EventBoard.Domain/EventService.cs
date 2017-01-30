@@ -92,7 +92,16 @@ namespace EventBoard.Domain
                 Tags = tags
             };
         }
-
+        public AllEventsModel EventsByUser(string UserId)
+        {
+            AllEventsModel all = GetAllEvents();
+            /*foreach (var x in all.Events)
+            {
+                if (x.Creator.Id != UserId.ToString()) all.Events.Remove(x);
+            }*/
+            all.Events.RemoveAll(l => l.Creator.Id != UserId);
+            return all;
+        }
         public int CreateNewEvent(EventNewViewModel newEventInfo, string username)
         {
             int? categoryId = Context.Categories
@@ -315,15 +324,25 @@ namespace EventBoard.Domain
         }
         public int get_events_num(string userId)
         {
-            return Context.Events.Where(l => l.User.Id == userId.ToString()).Count();
+            return Context.Events.Where(l => l.User.Id == userId).Count();
         }
         public int get_comments_num(string userId)
         {
-        return Context.Comments.Where(l => l.User.Id == userId.ToString()).Count();
+        return Context.Comments.Where(l => l.User.Id == userId).Count();
         }
         public int get_locked_comments_num(string userId)
         {
-            return Context.Comments.Where(l => l.User.Id == userId.ToString() && l.Suspended==true).Count();
+            return Context.Comments.Where(l => l.User.Id == userId && l.Suspended==true).Count();
+        }
+        public string get_user_name(string userId)
+        {
+            try
+            {
+                User querryed = Context.Users.Where(l => l.Id == userId).First();
+                string x = querryed.FirstName + " " + querryed.SecondName;
+                return x;
+            }
+            catch { return ""; }
         }
     }
 }

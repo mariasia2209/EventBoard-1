@@ -343,6 +343,7 @@
     <Content Include="Views\Event\AddComment.cshtml" />
     <Content Include="Views\Event\EditEvent.cshtml" />
     <Content Include="Views\Home\Maximus.cshtml" />
+    <Content Include="Views\Event\UserEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
